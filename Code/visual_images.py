@@ -90,3 +90,5 @@ if __name__ == "__main__":
     plt.imshow(test_mask[:,:,n_slice, 3])
     plt.title('Mask 3')
     plt.show()
+
+    print(type(combined_x[0, 0, 0, 0]))

@@ -29,10 +29,10 @@ if __name__ == "__main__":
     flair_list = sorted(glob.glob(TRAIN_DATASET_PATH + '*/*flair.nii'))
     mask_list = sorted(glob.glob(TRAIN_DATASET_PATH + '*/*seg.nii'))
 
-    print(t2_list[1])
-    print(t1ce_list[1])
-    print(flair_list[1])
-    print(mask_list[1])
+    # print(t2_list[1])
+    # print(t1ce_list[1])
+    # print(flair_list[1])
+    # print(mask_list[1])
 
     # Tạo thư mục nếu chưa tồn tại
     os.makedirs(INPUT_DATASET_PATH + "/images", exist_ok=True)
@@ -56,8 +56,8 @@ if __name__ == "__main__":
 
         val, counts = np.unique(mask, return_counts=True)
         if (1 - (counts[0] / counts.sum())) > 0.01:
-            mask = to_categorical(mask, num_classes=4)
+            cropped_mask = to_categorical(cropped_mask, num_classes=4)
             np.save(INPUT_DATASET_PATH + "/images/image_" + str(image) + ".npy", cropped_image)
-            np.save(INPUT_DATASET_PATH + "/mask/image_" + str(image) + ".npy", mask)
+            np.save(INPUT_DATASET_PATH + "/mask/image_" + str(image) + ".npy", cropped_mask)
 
     splitfolders.ratio(INPUT_DATASET_PATH, output=OUPUT_DATASET_PATH, ratio=(.8, .2), seed=42, group_prefix=None)
